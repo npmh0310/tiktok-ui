@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "~": "./src"
+        }
+      }
+    ]
+  ]
+}
+
+//   Ví dụ
+//   import App from './src/App.js'
+//  tạo thành: => import App from '~/App.js'
