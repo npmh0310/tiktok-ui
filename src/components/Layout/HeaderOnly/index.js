@@ -1,5 +1,6 @@
 
-import Header from './Header/index';
+import Header from '~/components/Layout/components/Header/index';
+
 
 function DefaltLayout({ children }) {
     return (

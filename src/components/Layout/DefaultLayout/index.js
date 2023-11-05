@@ -1,4 +1,4 @@
-import Header from './Header/index';
+import Header from '~/components/Layout/components/Header/index';
 import Sidebar from './Sidebar/index';
 
 function DefaltLayout({ children }) {
