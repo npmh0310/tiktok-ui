@@ -1,8 +1,6 @@
-
 import Header from '~/components/Layout/components/Header/index';
 
-
-function DefaltLayout({ children }) {
+function HeaderOnly({ children }) {
     return (
         <div>
             <Header />
@@ -13,4 +11,4 @@ function DefaltLayout({ children }) {
     );
 }
 
-export default DefaltLayout;
+export default HeaderOnly;
