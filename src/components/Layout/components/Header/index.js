@@ -1,12 +1,28 @@
-import classNames from 'classnames/bind'; // để có thể viết dấu - vào tên class
-import style from './Header.module.scss';
+import classNames from 'classnames/bind';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 
-const cx = classNames.bind(style);
-console.log(cx);
+import styles from './Header.module.scss';
+import images from '~/assets/images/index';
+
+const cx = classNames.bind(styles);
+
 function Header() {
     return (
         <header className={cx('wrapper')}>
-            <div className={cx('inner')}></div>
+            <div className={cx('inner')}>
+                <img src={images.logo.default} alt="Tiktok" />
+                <div className={cx('search')}>
+                    <input placeholder="Search accounts and videos" spellCheck={false} />
+                    <button className={cx('clear')}>
+                        <FontAwesomeIcon icon={faCircleXmark} />
+                    </button>
+
+                    <button className={cx('search-btn')}></button>
+                </div>
+                <div className={cx('actions')}></div>
+            </div>
         </header>
     );
 }
