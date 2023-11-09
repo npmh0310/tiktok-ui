@@ -23,7 +23,7 @@ function Button({
     onClick,
     ...passProps
 }) {
-    console.log(primary);
+    
     let Comp = 'button';
     const props = {
         onClick,
@@ -56,7 +56,7 @@ function Button({
         small, //? xử lý size
         large,
     });
-    console.log(primary);
+  
 
     return (
         <Comp className={classes} {...props}>

@@ -22,8 +22,6 @@
 .logo {
 }
 
-
-
 .search {
     width: 361px;
     height: var(--search-height);
@@ -57,15 +55,14 @@
 .search,
 .search-result {
     width: 361px;
-    
 }
 
-.search-title{
+.search-title {
     padding: 5px 12px;
     font-size: 14px;
     line-height: 18px;
     font-weight: 600;
-    color:rgba(22, 24, 35, 0.5)
+    color: rgba(22, 24, 35, 0.5);
 }
 
 .clear,
@@ -107,11 +104,12 @@
     }
 }
 
-
-.custom-login{
-    color: red ;
+//* Button menu
+.more-btn {
+    font-size: 2rem;
+    margin-left: 20px;
+    background-color: transparent;
+    padding: 4px 8px;
 }
 
-.actions {
-}
 

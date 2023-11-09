@@ -74,3 +74,9 @@
     // icon right
     margin-left: 8px;
 }
+
+.icon{
+    display: inline-block; // xét inline block để set width
+    width: 24px;
+    text-align: center;
+}
