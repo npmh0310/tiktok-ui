@@ -14,6 +14,7 @@
     justify-content: flex-start; // căn ra đầu
     border-radius: 0;
     padding: 11px 16px; //! không thể dùng padding nhỏ hơn bên padding root được nên phải cộng thêm vào và lớn hơn
+    line-height: 1.8rem; // fix lại để thẻ a vs button bằng nhau
     &:hover {
         background-color: #f8f8f8;
     }
@@ -21,4 +22,25 @@
 
 .menu-popper {
     padding-bottom: 8px;
+}
+
+//* Header menu language
+.header{
+    position: relative;
+    height: 50px;
+    margin-top: -8px; //? xử lý việc đẩy padding top của thằng popper mà k cần sửa
+}
+.back-btn{
+    width: 50px;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+.header-title{
+    //? Cách set cứng cho 1 cái gì đó ở giữa
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
 }

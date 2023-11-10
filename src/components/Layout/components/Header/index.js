@@ -34,6 +34,19 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'English',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    code: 'vn',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -49,12 +62,18 @@ const MENU_ITEMS = [
 function Header() {
     const [searchResult, setSearchReult] = useState([]);
 
-    // render ra popper khi hiển thị kết quả (fake api)
+    //? render ra popper khi hiển thị kết quả (fake api)
     useEffect(() => {
         setTimeout(() => {
             setSearchReult([]);
         }, 0);
     }, []);
+
+
+    //? handle login (xử lý khi click vào những thằng con không làm gì (không có đường dẫn, kh có children nhưng vẫn biết vừa click vào nó))
+    const handleMenuChange = (menuItem)=>{
+        console.log(menuItem)
+    }
 
     return (
         <header className={cx('wrapper')}>
@@ -101,7 +120,7 @@ function Header() {
                         Login
                     </Button>
                     {/* Thêm dấu ... ở cạnh button login */}
-                    <Menu   items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
