@@ -104,6 +104,26 @@
         background-color: rgba(22, 24, 35, 0.12);
     }
 }
+//* ACTION
+.actions {
+    display: flex;
+    align-items: center;
+}
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover; // để ảnh đúng tỉ lệ tràn hình tròn
+    margin-left: 12px;
+    cursor: pointer;
+}
+.action-btn {
+    font-size: 2.2rem;
+    background-color: transparent;
+    color: rgb(22, 24, 35);
+    padding: 4px 12px;
+    cursor: pointer;
+}
 
 //* Button menu
 .more-btn {
@@ -113,5 +133,3 @@
     padding: 4px 8px;
     cursor: pointer;
 }
-
-

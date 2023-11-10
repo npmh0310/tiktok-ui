@@ -3,7 +3,7 @@
 
 :root {
     --primary: #fe2c55;
-    --text-color: #333;
+    --text-color: #161823;
     --black: #000;
     --white: #fff;
     // Default layout
@@ -38,7 +38,25 @@ input,
     border: none;
 }
 // set lại màu thẻ a
-a[href] { //thẻ a có href là sửa 
+a[href] {
+    //thẻ a có href là sửa
     color: var(--text-color);
-    text-decoration: none
+    text-decoration: none;
 }
+
+//* CUSTOM TIPPY TOOLTIP
+body {
+    .tippy-box {
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+        background-color: #5f5f5f;
+    }
+    .tippy-arrow {
+        color: #5f5f5f;
+    }
+    .tippy-content{
+        padding: 8px 9px ;
+    }
+}   

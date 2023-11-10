@@ -15,6 +15,12 @@
     border-radius: 0;
     padding: 11px 16px; //! không thể dùng padding nhỏ hơn bên padding root được nên phải cộng thêm vào và lớn hơn
     line-height: 1.8rem; // fix lại để thẻ a vs button bằng nhau
+
+    //* Thêm đường gạch trên log out
+    &.separate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12)  ;
+    }
+
     &:hover {
         background-color: #f8f8f8;
     }
@@ -25,22 +31,21 @@
 }
 
 //* Header menu language
-.header{
+.header {
     position: relative;
     height: 50px;
     margin-top: -8px; //? xử lý việc đẩy padding top của thằng popper mà k cần sửa
 }
-.back-btn{
+.back-btn {
     width: 50px;
     height: 100%;
     background-color: transparent;
     cursor: pointer;
 }
-.header-title{
+.header-title {
     //? Cách set cứng cho 1 cái gì đó ở giữa
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }

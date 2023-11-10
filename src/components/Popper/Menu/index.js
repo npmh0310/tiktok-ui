@@ -9,9 +9,7 @@ import { useState } from 'react';
 const cx = classNames.bind(styles);
 
 //? bắt buộc đó là 1 function. Nếu không được truyền từ bên ngoài thì nó vẫn không lỗi
-    const defaultFn = ()=>{
-
-    }
+const defaultFn = () => {};
 
 function Menu({ children, items = [], onChange = defaultFn }) {
     //? render ra items
@@ -34,8 +32,8 @@ function Menu({ children, items = [], onChange = defaultFn }) {
                         if (isParent) {
                             // push thêm mảng children vào trong history
                             setHistory((prev) => [...prev, item.children]);
-                        }else {
-                            onChange(item)
+                        } else {
+                            onChange(item);
                         }
                     }}
                 />
@@ -47,9 +45,10 @@ function Menu({ children, items = [], onChange = defaultFn }) {
         <Tippy
             // visible
             delay={[0, 700]} //? xử lý khi hover vào sẽ hiện ra và vài giây sau mới tắt
+            offset={[12, 8]} //? để Menu lệch qua bên phải bớt (12: bên trái, 8: chiều cao)
             interactive
-            // chỉnh cho tippy nằm vào bên trái dưới
-            placement="bottom-end"
+            placement="bottom-end" //? chỉnh cho tippy nằm vào bên trái dưới
+            onHide={() => setHistory((prev) => prev.slice(0, 1))} //? xử lý khi hover đang phân cấp 2 đưa ra ngoài quay lại thì về lại phân cấp 1
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
                     <PopperWrapper
