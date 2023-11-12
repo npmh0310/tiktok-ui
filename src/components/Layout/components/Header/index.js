@@ -6,15 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
     faSpinner,
-    faMagnifyingGlass,
     faSignIn,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faCloudUpload,
-    faMessage,
-    faPaperPlane,
     faUser,
     faGear,
     faCoins,
@@ -38,6 +34,10 @@ import Menu from '~/components/Popper/Menu/index';
 import Tippy from '@tippyjs/react';
 //import sử dụng css của tippy
 import 'tippy.js/dist/tippy.css';
+import { InboxIcon, MessageIcon, SearchIcon, UploadIcon } from '~/components/Icons';
+//import Image component
+import Image from '~/components/Images/index';
+
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
@@ -106,7 +106,7 @@ function Header() {
         // Rải menu cũ vào
         ...MENU_ITEMS,
         {
-            icon: <FontAwesomeIcon icon={faSignOut  } />,
+            icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log out',
             to: './settings',
             separate: true, // thêm cái vạch vào trên log out
@@ -148,7 +148,7 @@ function Header() {
 
                         <button className={cx('search-btn')}>
                             {/* Search */}
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </HeadlessTippy>
@@ -158,17 +158,22 @@ function Header() {
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy delay={[0, 200]} content="Upload Video" placement="bottom">
+                            <Tippy delay={[0, 100]} content="Upload Video" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <UploadIcon />
                                 </button>
                             </Tippy>
-                            {/* <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon={faPaperPlane} />
-                            </button>
-                            <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon={faMessage} />
-                            </button> */}
+                            <Tippy delay={[0, 100]} content="Message" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+
+                            <Tippy delay={[0, 100]} content="Inbox" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
+                                </button>
+                            </Tippy>
                         </>
                     ) : (
                         <>
@@ -182,10 +187,12 @@ function Header() {
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
                             /* Thêm dấu ... ở cạnh button login */
-                            <img
+
+                            <Image //? Component image tự custom thế cho thẻ img
                                 className={cx('user-avatar')}
                                 src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tos-alisg-avt-0068/73ead36d6e46a7dea47d9d34a0c016fb.jpeg?x-expires=1699513200&x-signature=WhPlCe8qaPtrJ0JnpJQFl1RT94M%3D"
                                 alt="Minh Hieu"
+                                fallback="https://files.fullstack.edu.vn/f8-prod/user_photos/208701/6298053d43cd1.jpg" //? xử lý có mỗi lỗi ảnh sẽ có 1 image khá nhau
                             />
                         ) : (
                             /* Thêm dấu ... ở cạnh button login */

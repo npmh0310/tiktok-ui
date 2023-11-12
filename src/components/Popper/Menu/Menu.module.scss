@@ -15,7 +15,7 @@
     border-radius: 0;
     padding: 11px 16px; //! không thể dùng padding nhỏ hơn bên padding root được nên phải cộng thêm vào và lớn hơn
     line-height: 1.8rem; // fix lại để thẻ a vs button bằng nhau
-
+    
     //* Thêm đường gạch trên log out
     &.separate {
         border-top: 1px solid rgba(22, 24, 35, 0.12)  ;
