@@ -20,13 +20,36 @@ function Search() {
 
     //? xử lý việc có đang focus vào ô input không
     const [showResult, setShowResult] = useState(true);
+    //? xử lý việc khi đang nhập sẽ có icon loading
+    const [loading, setLoading] = useState(false);
 
     //? render ra popper khi hiển thị kết quả (fake api)
     useEffect(() => {
-        setTimeout(() => {
-            setSearchReult([1, 1, 2, 3]);
-        }, 0);
-    }, []);
+        //? xử lý việc searchValue mới đầu là ''
+        //? .trim() để cắt đi dấu ' ' khi nhập vào
+        if (!searchValue.trim()) {
+            setSearchReult([])
+            return;
+        }
+
+        // set lại loading
+        setLoading(true);
+
+        //? Rest API đưa từ link này vào. Sau đó đẩy nó vào trong searchResult
+        //? encodeURIComponent(searchValue) để mã hóa các ký tự kh hợp lệ (&, ?,... ) chuyển thành các ký tự hợp lên trên URL
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchReult(res.data);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            });
+        // setTimeout(() => {
+        //     setSearchReult([1, 1, 2, 3]);
+        // }, 0);
+    }, [searchValue]);
 
     //* Xử lý khi bấm ra ngoài khu vực của tippy
     const handleHideResult = () => {
@@ -44,10 +67,11 @@ function Search() {
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h4 className={cx('search-title')}>Account</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
+                        {/* Render ra các searchResult */}
+                        {/* Gửi vào trong AccountItem 1 props tên là data từ đó bên AccountItem có thể sử dụng nó */}
+                        {searchResult.map((result) => (
+                            <AccountItem key={result.id} data={result} />
+                        ))}
                     </PopperWrapper>
                 </div>
             )}
@@ -63,11 +87,11 @@ function Search() {
                     onChange={(e) => setSearchValue(e.target.value)}
                     onFocus={() => setShowResult(true)}
                 />
-                {!!searchValue && ( //? Đầu tiên chuyển searchValue sang boolean. Sau đó khi có search value thì nó mới hiển thị button này
+                {!!searchValue && !loading && ( //? Đầu tiên chuyển searchValue sang boolean. Sau đó khi có search value thì nó mới hiển thị button này. Và không có loading thì mới hiện
                     <button
                         onClick={() => {
                             setSearchValue('');
-                            setSearchReult([])
+                            setSearchReult([]);
                             inputRef.current.focus();
                         }}
                         className={cx('clear')}
@@ -76,7 +100,7 @@ function Search() {
                     </button>
                 )}
                 {/* loading */}
-                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
                 <button className={cx('search-btn')}>
                     {/* Search */}

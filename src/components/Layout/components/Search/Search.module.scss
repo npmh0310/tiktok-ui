@@ -51,13 +51,26 @@
     top: 50%;
     transform: translateY(-50%);
 }
+.loading {
+    //* CSS cho loading quay
+    animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform:  translateY(-50%) rotate(0);
+    }
+    to {
+        transform:  translateY(-50%) rotate(360deg);
+    }
+}
 
 .search-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 52px;
-    height:100%;
+    height: 100%;
     border-top-right-radius: var(--search-border-radius);
     border-bottom-right-radius: var(--search-border-radius);
     font-size: 1.8rem;
