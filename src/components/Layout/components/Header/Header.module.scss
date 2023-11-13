@@ -23,87 +23,6 @@
 .logo {
 }
 
-.search {
-    width: 361px;
-    height: var(--search-height);
-    padding: 0 0 0 16px;
-    display: flex;
-    position: relative;
-    background-color: #f1f1f2;
-    border-radius: var(--search-border-radius);
-    border: 1.5px solid transparent; // mặc định có border nên khi click focus-within vào nó vẫn còn border sẽ hủy hiệu ứng co co lại
-    input {
-        height: 100%; // để kéo dài dùng input lên
-        color: #000;
-        font-size: 1.6rem;
-        background-color: transparent;
-        outline: none; // tắt outline khi click vào
-        flex: 1; // chiếm trọn phần đẩy phần còn lại sát biên (dùng chung display: flex)
-        caret-color: var(--primary); // chỉnh màu cho dấu nháy nháy khi input
-    }
-
-    //* xử lý input khi nhập vào sẽ làm đổi màu icon search
-    input:not(:placeholder-shown) ~ .search-btn {
-        color: rgba(22, 24, 35, 0.75);
-    }
-    //* xử lý input khi nhập vào sẽ làm đổi màu icon search
-
-    &:focus-within {
-        border: 1.5px solid rgba(22, 24, 35, 0.2);
-    }
-}
-
-.search,
-.search-result {
-    width: 361px;
-}
-
-.search-title {
-    padding: 5px 12px;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 600;
-    color: rgba(22, 24, 35, 0.5);
-}
-
-.clear,
-.loading {
-    position: absolute;
-    color: rgba(22, 24, 35, 0.34);
-    right: 70px;
-    // căn giữa trên xuống
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.search-btn {
-    width: 52px;
-    height: 100%;
-    border-top-right-radius: var(--search-border-radius);
-    border-bottom-right-radius: var(--search-border-radius);
-    font-size: 1.8rem;
-    color: rgba(22, 24, 35, 0.34);
-
-    &:hover {
-        cursor: pointer;
-        // viết hover cho scss
-        background-color: rgba(22, 24, 35, 0.03);
-    }
-    &:active {
-        background-color: rgba(22, 24, 35, 0.06);
-    }
-    //  tạo đường gạch span giữa input và button search
-    &::after {
-        content: '';
-        position: absolute;
-        top: var(--search-top-spacer);
-        right: 52px;
-        width: 1px;
-        // calc height để sau ni có sửa thì vẫn ăn được vào
-        height: calc(var(--search-height) - var(--search-top-spacer) * 2);
-        background-color: rgba(22, 24, 35, 0.12);
-    }
-}
 //* ACTION
 .actions {
     display: flex;
@@ -116,15 +35,34 @@
     object-fit: cover; // để ảnh đúng tỉ lệ tràn hình tròn
     margin-left: 12px;
     cursor: pointer;
+    margin-left: 14px;
 }
 .action-btn {
+    display: flex;
+    position: relative;
     font-size: 2.2rem;
     background-color: transparent;
     color: rgb(22, 24, 35);
-    padding: 4px 12px;
+    padding: 4px 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
+}
+
+//* BADGE 
+.badge {
+    position: absolute;
+    top: -3px;
+    right: 0px;
+    padding: 0px 6px;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--white);
+    font-family: 'ProximaNova', sans-serif;
+    background-color: var(--primary);
 }
 
 //* Button menu

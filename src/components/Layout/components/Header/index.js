@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react';
 import images from '~/assets/images/index';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
-    faSpinner,
     faSignIn,
     faEllipsisVertical,
     faEarthAsia,
@@ -17,19 +14,10 @@ import {
     faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 
-// import tippy
-// import HeadlessTippy from '@tippyjs/react';
-import HeadlessTippy from '@tippyjs/react/headless'; // different import path!
-
-//import Wrapper
-import { Wrapper as PopperWrapper } from '~/components/Popper'; // sửa tên lại
-//import AccountItem
-import AccountItem from '~/components/AccountItem';
 // import Button
 import Button from '~/components/Button';
 //import Menu
 import Menu from '~/components/Popper/Menu/index';
-
 //import Tippy
 import Tippy from '@tippyjs/react';
 //import sử dụng css của tippy
@@ -37,6 +25,8 @@ import 'tippy.js/dist/tippy.css';
 import { InboxIcon, MessageIcon, SearchIcon, UploadIcon } from '~/components/Icons';
 //import Image component
 import Image from '~/components/Images/index';
+//import search component
+import Search from '../Search/index'
 
 const cx = classNames.bind(styles);
 
@@ -70,16 +60,8 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-    const [searchResult, setSearchReult] = useState([]);
-
     //? USER
     const currentUser = true;
-    //? render ra popper khi hiển thị kết quả (fake api)
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchReult([]);
-        }, 0);
-    }, []);
 
     //? handle login (xử lý khi click vào những thằng con không làm gì (không có đường dẫn, kh có children nhưng vẫn biết vừa click vào nó))
     const handleMenuChange = (menuItem) => {
@@ -108,7 +90,7 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log out',
-            to: './settings',
+            to: './logout',
             separate: true, // thêm cái vạch vào trên log out
         },
     ];
@@ -121,37 +103,9 @@ function Header() {
                     {/* Phải thêm default vào nó mới lấy đường dẫn còn nếu không nó chỉ lấy ra 1 object (images.logo) */}
                     <img src={images.logo.default} alt="Tiktok" />
                 </div>
-                {/* //* SEARCH */}
-                <HeadlessTippy
-                    interactive // giúp có thể select vào được những gì trong tippy
-                    visible={searchResult.length > 0} // nếu mà kết quả tìm kiếm > 0 mới hiện ra
-                    // (khi có phần tử trong mảng/ khi mà có account nào đó)
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Account</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" spellCheck={false} />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        {/* loading */}
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
 
-                        <button className={cx('search-btn')}>
-                            {/* Search */}
-                            <SearchIcon />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                {/* Search */}
+            <Search/>
 
                 {/* //* ACTION */}
                 {/* //? nếu mà có currentUser sẽ lấy current-user. Nếu không thì lấy action */}
@@ -172,6 +126,7 @@ function Header() {
                             <Tippy delay={[0, 100]} content="Inbox" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <InboxIcon />
+                                    <span className={cx('badge')}>12</span>
                                 </button>
                             </Tippy>
                         </>
