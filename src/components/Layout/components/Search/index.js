@@ -52,7 +52,7 @@ function Search() {
             setLoading(false);
         };
 
-        fetchApi()
+        fetchApi();
     }, [debounced]);
 
     //* Xử lý khi bấm ra ngoài khu vực của tippy
@@ -62,6 +62,15 @@ function Search() {
     // {
     //     console.log(searchValue);
     // }
+
+    //? Xử lý khi input dấu space
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+
     return (
         <HeadlessTippy
             interactive //? giúp có thể select vào được những gì trong tippy
@@ -88,7 +97,7 @@ function Search() {
                     value={searchValue}
                     placeholder="Search accounts and videos"
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     onFocus={() => setShowResult(true)}
                 />
                 {!!searchValue &&
@@ -107,7 +116,11 @@ function Search() {
                 {/* loading */}
                 {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                <button className={cx('search-btn')}>
+                <button
+                    className={cx('search-btn')}
+                    // xử lý hủy hành vi click vào button search thì tạo border:
+                    onMouseDown={(e) => e.preventDefault()}
+                >
                     {/* Search */}
                     <SearchIcon />
                 </button>

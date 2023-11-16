@@ -26,7 +26,11 @@ import { InboxIcon, MessageIcon, SearchIcon, UploadIcon } from '~/components/Ico
 //import Image component
 import Image from '~/components/Images/index';
 //import search component
-import Search from '../Search/index'
+import Search from '../Search/index';
+import { Link } from 'react-router-dom';
+
+//import routesConfig
+import routesConfig from '~/config/routes';
 
 const cx = classNames.bind(styles);
 
@@ -99,13 +103,16 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 {/* //* LOGO  */}
-                <div className={cx('logo')}>
+                <div className={cx('logo')}> 
                     {/* Phải thêm default vào nó mới lấy đường dẫn còn nếu không nó chỉ lấy ra 1 object (images.logo) */}
-                    <img src={images.logo.default} alt="Tiktok" />
+                    <Link to={routesConfig.home} className={cx('logo-link')}>
+                        {' '}
+                        <img src={images.logo.default} alt="Tiktok" />{' '}
+                    </Link>
                 </div>
 
                 {/* Search */}
-            <Search/>
+                <Search />
 
                 {/* //* ACTION */}
                 {/* //? nếu mà có currentUser sẽ lấy current-user. Nếu không thì lấy action */}
@@ -142,7 +149,8 @@ function Header() {
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
                             /* Thêm dấu ... ở cạnh button login */
-
+                           
+                            
                             <Image //? Component image tự custom thế cho thẻ img
                                 className={cx('user-avatar')}
                                 src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tos-alisg-avt-0068/73ead36d6e46a7dea47d9d34a0c016fb.jpeg?x-expires=1699513200&x-signature=WhPlCe8qaPtrJ0JnpJQFl1RT94M%3D"

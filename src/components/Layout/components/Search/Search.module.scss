@@ -16,6 +16,7 @@
         outline: none; // tắt outline khi click vào
         flex: 1; // chiếm trọn phần đẩy phần còn lại sát biên (dùng chung display: flex)
         caret-color: var(--primary); // chỉnh màu cho dấu nháy nháy khi input
+        font-family: var(--font-family);
     }
 
     //* xử lý input khi nhập vào sẽ làm đổi màu icon search

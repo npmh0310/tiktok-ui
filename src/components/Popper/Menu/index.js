@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 //? bắt buộc đó là 1 function. Nếu không được truyền từ bên ngoài thì nó vẫn không lỗi
 const defaultFn = () => {};
 
-function Menu({ children, items = [], onChange = defaultFn }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     //? render ra items
     const [history, setHistory] = useState([{ data: items }]);
     // console.log(history);
@@ -44,6 +44,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
     return (
         <Tippy
             // visible
+            hideOnClick={hideOnClick} //? Xử lý khi click vào avatar thì Tippy sẽ tắt đi
             delay={[0, 700]} //? xử lý khi hover vào sẽ hiện ra và vài giây sau mới tắt
             offset={[12, 8]} //? để Menu lệch qua bên phải bớt (12: bên trái, 8: chiều cao)
             interactive
