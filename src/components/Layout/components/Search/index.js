@@ -72,60 +72,65 @@ function Search() {
     };
 
     return (
-        <HeadlessTippy
-            interactive //? giúp có thể select vào được những gì trong tippy
-            visible={showResult && searchResult.length > 0} //? nếu mà kết quả tìm kiếm > 0 mới hiện ra
-            //? (khi có phần tử trong mảng/ khi mà có account nào đó)
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper>
-                        <h4 className={cx('search-title')}>Account</h4>
-                        {/* Render ra các searchResult */}
-                        {/* Gửi vào trong AccountItem 1 props tên là data từ đó bên AccountItem có thể sử dụng nó */}
-                        {searchResult.map((result) => (
-                            <AccountItem key={result.id} data={result} />
-                        ))}
-                    </PopperWrapper>
+        //* Sử dụng div để chống warning tippy
+      <div>
+            <HeadlessTippy
+             //? xử lý warning tipping
+            appendTo={()=> document.body}
+                interactive //? giúp có thể select vào được những gì trong tippy
+                visible={showResult && searchResult.length > 0} //? nếu mà kết quả tìm kiếm > 0 mới hiện ra
+                //? (khi có phần tử trong mảng/ khi mà có account nào đó)
+                render={(attrs) => (
+                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                        <PopperWrapper>
+                            <h4 className={cx('search-title')}>Account</h4>
+                            {/* Render ra các searchResult */}
+                            {/* Gửi vào trong AccountItem 1 props tên là data từ đó bên AccountItem có thể sử dụng nó */}
+                            {searchResult.map((result) => (
+                                <AccountItem key={result.id} data={result} />
+                            ))}
+                        </PopperWrapper>
+                    </div>
+                )}
+                //? Xử lý khi bấm ra ngoài khu vực của tippy
+                onClickOutside={handleHideResult}
+            >
+                <div className={cx('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Search accounts and videos"
+                        spellCheck={false}
+                        onChange={handleChange}
+                        onFocus={() => setShowResult(true)}
+                    />
+                    {!!searchValue &&
+                        !loading && ( //? Đầu tiên chuyển searchValue sang boolean. Sau đó khi có search value thì nó mới hiển thị button này. Và không có loading thì mới hiện
+                            <button
+                                onClick={() => {
+                                    setSearchValue('');
+                                    setSearchResult([]);
+                                    inputRef.current.focus();
+                                }}
+                                className={cx('clear')}
+                            >
+                                <FontAwesomeIcon icon={faCircleXmark} />
+                            </button>
+                        )}
+                    {/* loading */}
+                    {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+    
+                    <button
+                        className={cx('search-btn')}
+                        // xử lý hủy hành vi click vào button search thì tạo border:
+                        onMouseDown={(e) => e.preventDefault()}
+                    >
+                        {/* Search */}
+                        <SearchIcon />
+                    </button>
                 </div>
-            )}
-            //? Xử lý khi bấm ra ngoài khu vực của tippy
-            onClickOutside={handleHideResult}
-        >
-            <div className={cx('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search accounts and videos"
-                    spellCheck={false}
-                    onChange={handleChange}
-                    onFocus={() => setShowResult(true)}
-                />
-                {!!searchValue &&
-                    !loading && ( //? Đầu tiên chuyển searchValue sang boolean. Sau đó khi có search value thì nó mới hiển thị button này. Và không có loading thì mới hiện
-                        <button
-                            onClick={() => {
-                                setSearchValue('');
-                                setSearchResult([]);
-                                inputRef.current.focus();
-                            }}
-                            className={cx('clear')}
-                        >
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                    )}
-                {/* loading */}
-                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-
-                <button
-                    className={cx('search-btn')}
-                    // xử lý hủy hành vi click vào button search thì tạo border:
-                    onMouseDown={(e) => e.preventDefault()}
-                >
-                    {/* Search */}
-                    <SearchIcon />
-                </button>
-            </div>
-        </HeadlessTippy>
+            </HeadlessTippy>
+      </div>
     );
 }
 

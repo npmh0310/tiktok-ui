@@ -30,11 +30,17 @@
     padding-bottom: 8px;
 }
 
+//* Xử lý cuộn body
+.menu-body{
+    overflow-y: auto;
+}
+
 //* Header menu language
 .header {
     position: relative;
     height: 50px;
     margin-top: -8px; //? xử lý việc đẩy padding top của thằng popper mà k cần sửa
+    flex-shrink: 0; //? tạo scrollbar => giúp không bị nhỏ header khi scrollbar
 }
 .back-btn {
     width: 50px;
